@@ -1,0 +1,66 @@
+<html>
+    <head>
+        <script src="JSDiagrammer.js"></script>
+    </head>
+    <body>
+        <canvas id="myCanvas" width="2000" height="2000"></canvas>
+    </body>
+</html>
+
+<script>
+    function drawDiagram() {
+        // Set your vars
+        var canvas = document.getElementById('myCanvas');
+        var ctx = canvas.getContext('2d');
+        var space_between = 256;
+        var entity_size = 128;
+        var starting_x = 1000;
+        var starting_y = 1000;
+        var offset = 4;
+        var line_weight = 5;
+        var arrow_weight = 10;
+
+        // Create your nodes
+
+        // Create root node
+        var node1 = new Node(starting_x, starting_y, entity_size, entity_size, "YOUR-ICON-HERE.png", "Root Node");
+        node1.draw();
+        // Create node above
+        var node2 = new Node(node1.left, node1.top - node1.get_height - space_between, entity_size, entity_size, "YOUR-ICON-HERE.png", "Above");
+        node2.draw();
+        // Create node below
+        var node3 = new Node(node1.left, node1.top + node1.get_height + space_between, entity_size, entity_size, "YOUR-ICON-HERE.png", "Below");
+        node3.draw();
+        // Create node to the right
+        var node4 = new Node(node1.left + node1.get_width + space_between, node1.top, entity_size, entity_size, "YOUR-ICON-HERE.png", "Right");
+        node4.draw();
+        // Create node left
+        var node5 = new Node(node1.left - space_between - node1.get_width, node1.top, entity_size, entity_size, "YOUR-ICON-HERE.png", "Left");
+        node5.draw();
+        // Create node bottom left
+        var node6 = new Node(node1.left - space_between - node1.get_width, node1.top + node1.get_height + space_between, entity_size, entity_size, "YOUR-ICON-HERE.png", "Bellow Left");
+        node6.draw();
+        // Create node bottom right
+        var node7 = new Node(node1.left + space_between + node1.get_width, node1.top + node1.get_height + space_between, entity_size, entity_size, "YOUR-ICON-HERE.png", "Bellow Right");
+        node7.draw();
+        // Create node top right
+        var node8 = new Node(node1.left + space_between + node1.get_width, node1.top - space_between - node1.get_height, entity_size, entity_size, "YOUR-ICON-HERE.png", "Above Right");
+        node8.draw();
+        // Create node top left
+        var node9 = new Node(node1.left - space_between - node1.get_width, node1.top - space_between - node1.get_height, entity_size, entity_size, "YOUR-ICON-HERE.png", "Above Left");
+        node9.draw();
+
+        // Connect your nodes
+        arrow_up(ctx, node1, node2, offset, arrow_weight, line_weight, "red");
+        arrow_down(ctx, node1, node3, offset, arrow_weight, line_weight, "darkorange");
+        arrow_right(ctx, node1, node4, offset, arrow_weight, line_weight, "gold");
+        arrow_left(ctx, node1, node5, offset, arrow_weight, line_weight, "lawngreen");
+        arrow_down_left(ctx, node1, node6, offset, arrow_weight, line_weight, "aqua");
+        arrow_down_right(ctx, node1, node7, offset, arrow_weight, line_weight, "red");
+        arrow_up_right(ctx, node1, node8, offset, arrow_weight, line_weight, "aqua");
+        arrow_up_left(ctx, node1, node9, offset, arrow_weight, line_weight, "gold");
+    }
+
+    window.addEventListener('load', drawDiagram);
+
+</script>
